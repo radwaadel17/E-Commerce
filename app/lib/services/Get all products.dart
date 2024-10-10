@@ -1,3 +1,4 @@
+import 'package:app/helper/Api%20class.dart';
 import 'package:app/models/product%20model.dart';
 import 'package:dio/dio.dart';
 
@@ -5,7 +6,8 @@ class getAllproducts {
   final Dio dio;
   getAllproducts(this.dio);
   Future<List<ProductModel>> GetAllproductsaync() async {
-    Response response = await dio.get('https://fakestoreapi.com/products');
+    Response response =
+        await Api(Dio()).getRequest('https://fakestoreapi.com/products');
     List<dynamic> JsonDatalist = response.data;
     List<ProductModel> listProductModel = getProductList(JsonDatalist);
     return listProductModel;
