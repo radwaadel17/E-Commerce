@@ -13,6 +13,7 @@ void main() async{
     await Firebase.initializeApp(
   options: DefaultFirebaseOptions.currentPlatform,
 );
+
 }
 class App extends StatelessWidget {
   const App({super.key});

@@ -1,3 +1,4 @@
+import 'package:app/Home%20page.dart';
 import 'package:app/helper/Constants.dart';
 import 'package:app/views/Sign%20up%20page.dart';
 import 'package:app/views/user%20data%20page.dart';
@@ -10,6 +11,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:page_animation_transition/animations/right_to_left_faded_transition.dart';
 import 'package:page_animation_transition/page_animation_transition.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class SignIn extends StatefulWidget {
   SignIn({super.key});
 
@@ -22,25 +25,37 @@ class _SignInState extends State<SignIn> {
   String? Email ;
   String? Password ;
   bool IsLoading = false;
+  CollectionReference Messages = FirebaseFirestore.instance.collection('UsersData');
+
   void ShowSnackbar(context , String msg) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg , style: TextStyle(color: Kcolor),) , backgroundColor: KButtonColor,));
   }
-  Future<UserCredential> signInWithGoogle() async {
-  // Trigger the authentication flow
-  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+   Future<void> checkProfileCompletion() async {
+     CollectionReference users =
+      FirebaseFirestore.instance.collection('UsersData');
+    var userSnapshot = await users.where('e', isEqualTo: Email).get();
 
-  // Obtain the auth details from the request
-  final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    if (userSnapshot.docs.isNotEmpty) {
+      var userData = userSnapshot.docs.first.data() as Map<String, dynamic>;
+      bool isProfileCompleted = userData['isProfileCompleted'] ?? false;
 
-  // Create a new credential
-  final credential = GoogleAuthProvider.credential(
-    accessToken: googleAuth?.accessToken,
-    idToken: googleAuth?.idToken,
-  );
-
-  // Once signed in, return the UserCredential
-  return await FirebaseAuth.instance.signInWithCredential(credential);
-}
+      if (isProfileCompleted) {
+        Navigator.of(context).pushReplacement(
+          PageAnimationTransition(
+            page: Home_page(),
+            pageAnimationType: RightToLeftFadedTransition(),
+          ),
+        );
+      }else if (isProfileCompleted == false){
+        Navigator.of(context).pushReplacement(
+          PageAnimationTransition(
+            page: UserDataPage(email: Email!),
+            pageAnimationType: RightToLeftFadedTransition(),
+          ),
+        );
+      }
+    }
+    }
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
@@ -91,6 +106,7 @@ class _SignInState extends State<SignIn> {
                   ),
                   EmailTxt(onChanged: (data){
                   Email = data; 
+                
                   } ,),
                   SizedBox(
                     height: 15.h,
@@ -149,7 +165,8 @@ class _SignInState extends State<SignIn> {
                             password: Password!,
                           );
                            ShowSnackbar(context, 'Sucsess Login');
-                           Navigator.of(context).push(PageAnimationTransition(page: UserDataPage(), pageAnimationType: RightToLeftFadedTransition()));
+                           checkProfileCompletion();
+
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'user-not-found') {
                             ShowSnackbar(context, 'No user found for that email.');
@@ -211,7 +228,6 @@ class _SignInState extends State<SignIn> {
                         ),
                         GestureDetector(
                             onTap: () {
-                               signInWithGoogle(); 
                             },
                             child: Image.asset('assets/images/google.png')),
                         SizedBox(
