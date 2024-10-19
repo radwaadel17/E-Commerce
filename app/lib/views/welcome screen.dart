@@ -54,7 +54,6 @@ class Welcome_screen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-
               Navigator.pushNamed(context, 'on');
             },
             child: Text(

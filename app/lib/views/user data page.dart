@@ -1,3 +1,4 @@
+import 'package:app/helper/Constants.dart';
 import 'package:flutter/material.dart';
 
 class UserDataPage extends StatelessWidget {
@@ -6,7 +7,7 @@ class UserDataPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      backgroundColor: Kcolor,
     );
   }
 }
