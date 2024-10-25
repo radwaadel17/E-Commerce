@@ -1,4 +1,4 @@
-import 'package:app/Home%20page.dart';
+import 'package:app/views/Home%20page.dart';
 import 'package:app/helper/Constants.dart';
 import 'package:app/views/Sign%20up%20page.dart';
 import 'package:app/views/user%20data%20page.dart';
@@ -42,7 +42,7 @@ class _SignInState extends State<SignIn> {
       if (isProfileCompleted) {
         Navigator.of(context).pushReplacement(
           PageAnimationTransition(
-            page: Home_page(),
+            page: Home_page(email: Email!,),
             pageAnimationType: RightToLeftFadedTransition(),
           ),
         );

@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:app/models/rating%20model.dart';
 
 class ProductModel {
-  final int id;
+  final dynamic id;
   final String title;
-  final double price;
+  final dynamic price;
   final String categorey;
   final String Image;
   final String description;
@@ -26,6 +26,6 @@ class ProductModel {
         price: jsonData['price'],
         title: jsonData['title'],
         description: jsonData['description'],
-        rating: RatingModel.fromJson([jsonData['rating']]));
+        rating: RatingModel.fromJson(jsonData['rating']));
   }
 }

@@ -79,7 +79,7 @@ class onboarding_screen extends StatelessWidget {
               right: 15.w,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(PageAnimationTransition(
+                  Navigator.of(context).pushReplacement(PageAnimationTransition(
                       page: SignIn(),
                       pageAnimationType: RightToLeftFadedTransition()));
                 },

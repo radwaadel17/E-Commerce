@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:page_animation_transition/animations/right_to_left_transition.dart';
 import 'package:page_animation_transition/page_animation_transition.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 class splash_page extends StatefulWidget {
   const splash_page({super.key});
 

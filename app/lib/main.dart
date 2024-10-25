@@ -1,4 +1,4 @@
-import 'package:app/Home%20page.dart';
+import 'package:app/views/Home%20page.dart';
 import 'package:app/firebase_options.dart';
 import 'package:app/views/Sign%20in%20page.dart';
 import 'package:app/views/onboarding%20page.dart';

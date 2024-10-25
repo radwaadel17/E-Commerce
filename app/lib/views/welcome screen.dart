@@ -1,6 +1,7 @@
 import 'package:app/helper/Constants.dart';
 import 'package:app/main.dart';
 import 'package:app/views/Sign%20in%20page.dart';
+import 'package:app/views/onboarding%20page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_animation_transition/animations/right_to_left_faded_transition.dart';
@@ -54,7 +55,7 @@ class Welcome_screen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.pushNamed(context, 'on');
+              Navigator.of(context).pushReplacement(PageAnimationTransition(page: onboarding_screen(), pageAnimationType:RightToLeftFadedTransition()));
             },
             child: Text(
               "Let's Get Started",

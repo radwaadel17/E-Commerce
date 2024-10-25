@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:app/Home%20page.dart';
+import 'package:app/views/Home%20page.dart';
 import 'package:app/helper/Constants.dart';
 import 'package:app/widgets/TextField%20name.dart';
 import 'package:app/widgets/TextFiled%20number.dart';
@@ -170,7 +170,7 @@ class _UserDataPageState extends State<UserDataPage> {
                     if (formkey.currentState!.validate()) {
                       Navigator.of(context).push(
                         PageAnimationTransition(
-                            page: Home_page(),
+                            page: Home_page(email: widget.email,),
                             pageAnimationType: RightToLeftFadedTransition()),
                       );
                     }
