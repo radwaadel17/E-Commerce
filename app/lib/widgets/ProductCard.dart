@@ -29,7 +29,7 @@ class ProductCard extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(8.0.r),
                   child: Container(
-                    height: 140.h,
+                    height: 120.h,
                     //width: 200.h,
                     decoration: BoxDecoration(
                       color: Kcolor,
@@ -47,7 +47,7 @@ class ProductCard extends StatelessWidget {
                       padding:EdgeInsets.only(left: 25.w),
                       child: Text(model.categorey  , 
                       style: TextStyle(
-                        fontSize: 15.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w600,
                         overflow: TextOverflow.ellipsis
                       

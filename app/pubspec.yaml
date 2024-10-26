@@ -45,6 +45,7 @@ dependencies:
   smooth_page_indicator: ^1.2.0+3
   cloud_firestore: ^5.4.4
   image_picker: ^1.1.2
+  device_preview: ^1.2.0
 
 dev_dependencies:
   flutter_test:
