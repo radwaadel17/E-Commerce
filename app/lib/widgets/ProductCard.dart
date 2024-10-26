@@ -95,7 +95,7 @@ class ProductCard extends StatelessWidget {
             ),
           ),
            Positioned(
-            bottom: 23.h,
+           // bottom: 23.h,
             right: 0.w,
             child:IconButton(onPressed: (){}, icon: Icon(
               Icons.favorite_border,

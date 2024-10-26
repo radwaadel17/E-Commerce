@@ -12,13 +12,24 @@ class HomePageGrid extends StatelessWidget {
  final List<ProductModel> data ;
   @override
   Widget build(BuildContext context) {
+     double screenWidth = MediaQuery.of(context).size.width;
+
+    int crossAxisCount;
+    if (screenWidth < 600) { 
+      crossAxisCount = 2; 
+    } else if (screenWidth < 1200) {
+      crossAxisCount = 3; 
+    } else { // للشاشات الكبيرة
+      crossAxisCount = 4; 
+    }
+    double itemwidth = screenWidth / crossAxisCount ;
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: MediaQuery.of(context).size.width / MediaQuery.of(context).size.width * 0.6 ,
+        crossAxisCount: crossAxisCount,
+        childAspectRatio:(itemwidth / (itemwidth * 1.5)),
         crossAxisSpacing: 5.0.w,
         mainAxisSpacing: 1.0.h,
           ),

@@ -32,188 +32,190 @@ class _ProductDetailsState extends State<ProductDetails> {
       backgroundColor: Kcolor,
       body: Center(
         child: Stack(
-          children:[ ListView(
+          children:[ 
+            
+            ListView(
             children: [
               SizedBox(
-                height: 80.h,
+                height: MediaQuery.of(context).size.height/60,
               ),
               Container(
-                height: 120.h,
+                height: MediaQuery.of(context).size.height *0.25 ,
                 
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(widget.productModel.Image))),
               ),
               Row(
-                //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 40.w),
-                    child: Text(
-                      widget.productModel.categorey,
-                      style: TextStyle(
-                        color: Kcolortxt,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  
-                ],
-              ),
-            
-               Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 38.w),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.star_sharp,
-                          color: Colors.yellow,
-                        ),
-                        Text('${widget.productModel.rating.rate}'),
-                      ],
-                    ),
-                  ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 39.w),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(widget.productModel.title,
-                      style: TextStyle(
-                        //color: K,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w600,
-                      )),
-                ),
-              ),
-             
-              SizedBox(
-                height: 10.h,
-              ),
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 40.w),
-                    child: Text(
-                      'Product Details',
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        color: Kcolortxt,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 40.w , right: 15.w),
-                child: Text(
-                  widget.productModel.description,
-                  style: TextStyle(
-                      //  color: Kcolortxt,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15.sp,
-                      overflow: TextOverflow.ellipsis,
+                              //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Padding(
+               padding: EdgeInsets.only(left: 40.w),
+               child: Text(
+                 widget.productModel.categorey,
+                 style: TextStyle(
+                   color: Kcolortxt,
+                   fontWeight: FontWeight.w600,
+                 ),
+               ),
+                                ),
+                                
+                              ],
+                            ),
                      
-                      ),
-                       maxLines:3,
-                      //overflow: TextOverflow.ellipsis,
-                      //maxLines: 3 ,
-                ),
-              ),
-              const Divider(
-                endIndent: 50,
-                indent: 50,
-              ),
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 40.w),
-                    child: Text(
-                      'Select Size',
-                      style: TextStyle(
-                        //color: Kcolortxt,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              SizedBox(
-                height: 39.h,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 29.w),
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: Sizes.length,
-                      itemBuilder: (context, index) {
-                        bool isSelected = selected == index;
-          
-                        return GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                selected = index;
-                              });
-                            },
-                            child: SizesContainer(
-                              txt: Sizes[index],
-                              isSelected: isSelected,
-                            ));
-                      }),
-                ),
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 40.w),
-                    child: Text(
-                      'Select Color',
-                      style: TextStyle(
-                        //color: Kcolortxt,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              SizedBox(
-                height: 30.h,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 29.w),
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: colorList.length,
-                      itemBuilder: (context, index) {
-                        bool ch = selectedColor == index;
-                        return GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                selectedColor = index;
-                              });
-                            },
-                            child: ColorContainer(
-                              color: colorList[index],
-                              ch: ch,
-                            ));
-                      }),
-                ),
-              ),
-              SizedBox(
-                height: 100.h,
-              ),
+                             Padding(
+               padding: EdgeInsets.symmetric(horizontal: 38.w),
+               child: Row(
+                 children: [
+                   Icon(
+                     Icons.star_sharp,
+                     color: Colors.yellow,
+                   ),
+                   Text('${widget.productModel.rating.rate}'),
+                 ],
+               ),
+                                ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 39.w),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(widget.productModel.title,
+                 style: TextStyle(
+                   //color: K,
+                   fontSize: 20.sp,
+                   fontWeight: FontWeight.w600,
+                 )),
+                              ),
+                            ),
+                      
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height/60,
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+               padding: EdgeInsets.only(left: 40.w),
+               child: Text(
+                 'Product Details',
+                 style: TextStyle(
+                   fontSize: 16.sp,
+                   color: Kcolortxt,
+                   fontWeight: FontWeight.w600,
+                 ),
+               ),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 40.w , right: 15.w),
+                              child: Text(
+                                widget.productModel.description,
+                                style: TextStyle(
+                 //  color: Kcolortxt,
+                 fontWeight: FontWeight.w600,
+                 fontSize: 15.sp,
+                 overflow: TextOverflow.ellipsis,
+                
+                 ),
+                  maxLines:3,
+                 //overflow: TextOverflow.ellipsis,
+                 //maxLines: 3 ,
+                              ),
+                            ),
+                            const Divider(
+                              endIndent: 50,
+                              indent: 50,
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+               padding: EdgeInsets.only(left: 40.w),
+               child: Text(
+                 'Select Size',
+                 style: TextStyle(
+                   //color: Kcolortxt,
+                   fontSize: 16.sp,
+                   fontWeight: FontWeight.w600,
+                 ),
+               ),
+                                ),
+                              ],
+                            ),
+                             SizedBox(
+                              height: MediaQuery.of(context).size.height/60,
+                            ),
+                            SizedBox(
+                              height: 39.h,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 29.w),
+                                child: ListView.builder(
+                 scrollDirection: Axis.horizontal,
+                 itemCount: Sizes.length,
+                 itemBuilder: (context, index) {
+                   bool isSelected = selected == index;
+                 
+                   return GestureDetector(
+                       onTap: () {
+                         setState(() {
+                           selected = index;
+                         });
+                       },
+                       child: SizesContainer(
+                         txt: Sizes[index],
+                         isSelected: isSelected,
+                       ));
+                 }),
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height/60,
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+               padding: EdgeInsets.only(left: 40.w),
+               child: Text(
+                 'Select Color',
+                 style: TextStyle(
+                   //color: Kcolortxt,
+                   fontSize: 16.sp,
+                   fontWeight: FontWeight.w600,
+                 ),
+               ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height/60,
+                            ),
+                            SizedBox(
+                              height: 30.h,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 29.w),
+                                child: ListView.builder(
+                 scrollDirection: Axis.horizontal,
+                 itemCount: colorList.length,
+                 itemBuilder: (context, index) {
+                   bool ch = selectedColor == index;
+                   return GestureDetector(
+                       onTap: () {
+                         setState(() {
+                           selectedColor = index;
+                         });
+                       },
+                       child: ColorContainer(
+                         color: colorList[index],
+                         ch: ch,
+                       ));
+                 }),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 100.h,
+                            )
               
             ],
-          ),
+                      ),
         
           Positioned(
             bottom: 0.h,
