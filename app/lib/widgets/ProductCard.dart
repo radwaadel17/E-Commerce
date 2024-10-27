@@ -41,21 +41,20 @@ class ProductCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    Padding(
-                      padding:EdgeInsets.only(left: 25.w),
-                      child: Text(model.categorey  , 
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w600,
-                        overflow: TextOverflow.ellipsis
-                      
-                      ),
-                      maxLines:2,
-                      ),
+                Padding(
+                  padding:EdgeInsets.only(left: 25.w),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(model.categorey  , 
+                    style: TextStyle(
+                       fontFamily: 'Montserrat',
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
+                      overflow: TextOverflow.ellipsis
                     ),
-                  ],
+                    maxLines:2,
+                    ),
+                  ),
                 ),
                  Row(
                   children: [
@@ -63,7 +62,8 @@ class ProductCard extends StatelessWidget {
                       padding:EdgeInsets.only(left: 25.w),
                       child: Text('${model.price}\$'  , 
                       style: TextStyle(
-                        fontSize: 15.sp,
+                         fontFamily: 'Montserrat',
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w600,
                       ),
                       ),
@@ -84,7 +84,8 @@ class ProductCard extends StatelessWidget {
                       padding:EdgeInsets.only(left: 5.w),
                       child: Text('${model.rating.rate}'  , 
                       style: TextStyle(
-                        fontSize: 15.sp,
+                         fontFamily: 'Montserrat',
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w600,
                       ),
                       ),

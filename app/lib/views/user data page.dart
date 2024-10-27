@@ -181,7 +181,7 @@ class _UserDataPageState extends State<UserDataPage> {
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: KButtonColor,
-                    fixedSize: Size(250.w, 46.h),
+                    fixedSize: Size(250.w, 40.h),
                   ),
                 ),
               ],

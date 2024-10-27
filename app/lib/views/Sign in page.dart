@@ -21,20 +21,52 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  GlobalKey <FormState> formkey = GlobalKey();
-  String? Email ;
-  String? Password ;
+  GlobalKey<FormState> formkey = GlobalKey();
+  String? Email;
+  String? Password;
   bool IsLoading = false;
-  CollectionReference Messages = FirebaseFirestore.instance.collection('UsersData');
-
-  void ShowSnackbar(context , String msg) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg , style: TextStyle(color: Kcolor),) , backgroundColor: KButtonColor,));
-  }
-   Future<void> checkProfileCompletion() async {
-     CollectionReference users =
+  CollectionReference Messages =
       FirebaseFirestore.instance.collection('UsersData');
-    var userSnapshot = await users.where('e', isEqualTo: Email).get();
+  Future<String?> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Sign in with the credential and return the UserCredential
+    final UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    // Retrieve the email from the user object
+    final String? email = userCredential.user?.email;
+
+    // Return the email or null if it wasn't found
+    return email;
+  }
+
+  void ShowSnackbar(context, String msg) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+        msg,
+        style: TextStyle(color: Kcolor),
+      ),
+      backgroundColor: KButtonColor,
+    ));
+  }
+
+  Future<void> checkProfileCompletion() async {
+    CollectionReference users =
+        FirebaseFirestore.instance.collection('UsersData');
+    var userSnapshot = await users.where('e', isEqualTo: Email).get();
+    print("Number of documents: ${userSnapshot.docs.length}");
     if (userSnapshot.docs.isNotEmpty) {
       var userData = userSnapshot.docs.first.data() as Map<String, dynamic>;
       bool isProfileCompleted = userData['isProfileCompleted'] ?? false;
@@ -42,11 +74,13 @@ class _SignInState extends State<SignIn> {
       if (isProfileCompleted) {
         Navigator.of(context).pushReplacement(
           PageAnimationTransition(
-            page: Home_page(email: Email!,),
+            page: Home_page(
+              email: Email!,
+            ),
             pageAnimationType: RightToLeftFadedTransition(),
           ),
         );
-      }else if (isProfileCompleted == false){
+      } else if (isProfileCompleted == false) {
         Navigator.of(context).pushReplacement(
           PageAnimationTransition(
             page: UserDataPage(email: Email!),
@@ -54,12 +88,21 @@ class _SignInState extends State<SignIn> {
           ),
         );
       }
+      // print('$isProfileCompleted');
+    } else {
+      Navigator.of(context).pushReplacement(
+        PageAnimationTransition(
+          page: UserDataPage(email: Email!),
+          pageAnimationType: RightToLeftFadedTransition(),
+        ),
+      );
     }
-    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
-      inAsyncCall: IsLoading ,
+      inAsyncCall: IsLoading,
       child: Scaffold(
         backgroundColor: Kcolor,
         body: Form(
@@ -81,7 +124,6 @@ class _SignInState extends State<SignIn> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24.w),
                     child: Text(
-                      
                       'Hi! , Welcome back you have been missed.',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 15.sp, color: Kcolortxt),
@@ -104,10 +146,11 @@ class _SignInState extends State<SignIn> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  EmailTxt(onChanged: (data){
-                  Email = data; 
-                
-                  } ,),
+                  EmailTxt(
+                    onChanged: (data) {
+                      Email = data;
+                    },
+                  ),
                   SizedBox(
                     height: 15.h,
                   ),
@@ -125,9 +168,11 @@ class _SignInState extends State<SignIn> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  PassowrdTxt(onChanged: (value){
-                    Password = value; 
-                  },),
+                  PassowrdTxt(
+                    onChanged: (value) {
+                      Password = value;
+                    },
+                  ),
                   SizedBox(
                     height: 10.h,
                   ),
@@ -154,31 +199,28 @@ class _SignInState extends State<SignIn> {
                   ElevatedButton(
                     onPressed: () async {
                       if (formkey.currentState!.validate()) {
-                        IsLoading = true ;
-                        setState(() {
-                          
-                        });
+                        IsLoading = true;
+                        setState(() {});
                         try {
                           final credential = await FirebaseAuth.instance
                               .signInWithEmailAndPassword(
                             email: Email!,
                             password: Password!,
                           );
-                           ShowSnackbar(context, 'Sucsess Login');
-                           checkProfileCompletion();
-
+                          ShowSnackbar(context, 'Sucsess Login');
+                          checkProfileCompletion();
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'user-not-found') {
-                            ShowSnackbar(context, 'No user found for that email.');
+                            ShowSnackbar(
+                                context, 'No user found for that email.');
                             //print('No user found for that email.');
                           } else if (e.code == 'wrong-password') {
-                             ShowSnackbar(context, 'Wrong password provided for that user.');
+                            ShowSnackbar(context,
+                                'Wrong password provided for that user.');
                           }
                         }
-                         IsLoading = false;
-                        setState(() {
-                         
-                        });
+                        IsLoading = false;
+                        setState(() {});
                       }
                     },
                     child: Text(
@@ -227,7 +269,10 @@ class _SignInState extends State<SignIn> {
                           width: 20.w,
                         ),
                         GestureDetector(
-                            onTap: () {
+                            onTap: () async {
+                              String? mail = await signInWithGoogle();
+                              Email = mail;
+                              checkProfileCompletion();
                             },
                             child: Image.asset('assets/images/google.png')),
                         SizedBox(

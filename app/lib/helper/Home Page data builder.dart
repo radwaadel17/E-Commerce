@@ -39,7 +39,6 @@ class _HomePageBuilderState extends State<HomePageBuilder> {
     // TODO: implement initState
     fetchData();
   }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<ProductModel>>(

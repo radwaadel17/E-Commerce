@@ -1,10 +1,14 @@
 import 'package:app/helper/Constants.dart';
 import 'package:app/helper/Home%20Page%20data%20builder.dart';
+import 'package:app/views/Sign%20in%20page.dart';
 import 'package:app/widgets/Home%20page%20grid.dart';
 import 'package:app/widgets/ProductCard.dart';
 import 'package:app/widgets/customContainercategory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:page_animation_transition/animations/right_to_left_faded_transition.dart';
+import 'package:page_animation_transition/page_animation_transition.dart';
 
 class Home_page extends StatefulWidget {
   const Home_page({super.key , required this.email});
@@ -26,9 +30,20 @@ class _Home_pageState extends State<Home_page> {
   Widget build(BuildContext context) {
     print('$name');
     return Scaffold(
+      
       backgroundColor: Kcolor,
       appBar: AppBar(
         backgroundColor: Kcolor,
+        leading: IconButton(onPressed: (){
+
+
+          GoogleSignIn googleSignIn = GoogleSignIn();
+          googleSignIn.disconnect();
+          Navigator.of(context).push(PageAnimationTransition(page: SignIn(), pageAnimationType: RightToLeftFadedTransition()));
+        }, icon: Icon(
+          Icons.arrow_back,
+        )),
+        
         actions: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.w , vertical: 2.h),
@@ -40,7 +55,9 @@ class _Home_pageState extends State<Home_page> {
         ],
       ),
       body: Column(
+
         children: [
+          SizedBox(height: 10.h,),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 35.w),
             child: TextField(

@@ -27,6 +27,7 @@ class customContainerProducts extends StatelessWidget {
             child: Text(
               txt,
               style: TextStyle(
+                
                 color: Kcolor ,
                 fontSize: 10.sp,
               ),

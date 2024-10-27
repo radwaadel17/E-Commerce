@@ -25,9 +25,10 @@ class _ProductDetailsState extends State<ProductDetails> {
     Colors.grey,
     Colors.teal,
   ];
-
+    bool Isread = false;
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Kcolor,
       body: Center(
@@ -54,6 +55,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                child: Text(
                  widget.productModel.categorey,
                  style: TextStyle(
+                   fontFamily: 'Montserrat',
+                   fontSize: 16.sp,
                    color: Kcolortxt,
                    fontWeight: FontWeight.w600,
                  ),
@@ -75,12 +78,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                  ],
                ),
                                 ),
+                                SizedBox(
+                              height: MediaQuery.of(context).size.height/60,
+                            ),
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 39.w),
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(widget.productModel.title,
                  style: TextStyle(
+                   fontFamily: 'Montserrat',
                    //color: K,
                    fontSize: 20.sp,
                    fontWeight: FontWeight.w600,
@@ -98,41 +105,60 @@ class _ProductDetailsState extends State<ProductDetails> {
                child: Text(
                  'Product Details',
                  style: TextStyle(
+                   fontFamily: 'Montserrat',
                    fontSize: 16.sp,
                    color: Kcolortxt,
-                   fontWeight: FontWeight.w600,
-                 ),
-               ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 40.w , right: 15.w),
-                              child: Text(
-                                widget.productModel.description,
-                                style: TextStyle(
-                 //  color: Kcolortxt,
-                 fontWeight: FontWeight.w600,
-                 fontSize: 15.sp,
-                 overflow: TextOverflow.ellipsis,
-                
-                 ),
-                  maxLines:3,
-                 //overflow: TextOverflow.ellipsis,
-                 //maxLines: 3 ,
-                              ),
-                            ),
-                            const Divider(
-                              endIndent: 50,
-                              indent: 50,
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-               padding: EdgeInsets.only(left: 40.w),
-               child: Text(
-                 'Select Size',
-                 style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 40.w, right: 15.w),
+                child: Text(
+                  '${widget.productModel.description}',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 15.sp,
+                    overflow: Isread == true ? null : TextOverflow.ellipsis,
+                  ),
+                  maxLines: Isread == true ? null : 3 ,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 40.w, right: 15.w),
+                child: GestureDetector(
+                  onTap: (){
+                   setState(() {
+                     Isread = !Isread;
+                   });
+                  },
+                  child: Text(
+                    Isread ? 'Read less' : 'Read more',
+                    style: TextStyle(
+                       fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15.sp,
+                      color: KButtonColor,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ),
+              const Divider(
+                endIndent: 50,
+                indent: 50,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 40.w),
+                    child: Text(
+                      'Select Size',
+                      style: TextStyle(
+                         fontFamily: 'Montserrat',
                    //color: Kcolortxt,
                    fontSize: 16.sp,
                    fontWeight: FontWeight.w600,
@@ -176,7 +202,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                padding: EdgeInsets.only(left: 40.w),
                child: Text(
                  'Select Color',
+                 
                  style: TextStyle(
+                   fontFamily: 'Montserrat',
                    //color: Kcolortxt,
                    fontSize: 16.sp,
                    fontWeight: FontWeight.w600,
@@ -236,7 +264,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   BoxShadow(
                        color: Kcolortxt.withOpacity(0.5),
                        spreadRadius: 1.r,
-                       blurRadius: 7.r,
+                       blurRadius: 1.r,
                   )
 
               ]           
@@ -247,6 +275,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   Text(
                      '${widget.productModel.price}\$', 
                      style: TextStyle(
+                       fontFamily: 'Montserrat',
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w700,
                      ),
@@ -266,6 +295,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                        const Text('Add to cart' ,
                        
                        style: TextStyle(
+                         fontFamily: 'Montserrat',
                            color: Kcolor ,
                            fontWeight: FontWeight.w600,
                        ),
