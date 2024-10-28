@@ -117,12 +117,31 @@ class _SignUpState extends State<SignUp> {
                               pageAnimationType: RightToLeftFadedTransition()));
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'weak-password') {
-                            ShowSnackbar(
-                                context, 'The password provided is too weak.');
+                            /* ShowSnackbar(
+                                context, 'The password provided is too weak.'); */
+                             /*  AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.warning,
+                              animType: AnimType.rightSlide,
+                              title: 'Warning!!',
+                              desc: 'The password provided is too weak.',
+                              btnCancelOnPress: () {},
+                              btnOkOnPress: () {},
+                            )..show(); */
                             //print('The password provided is too weak.');
                           } else if (e.code == 'email-already-in-use') {
                             ShowSnackbar(context,
                                 'The account already exists for that email.');
+                            /*  AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.warning,
+                              animType: AnimType.rightSlide,
+                              title: 'Warning!!',
+                              desc: 'The account already exists for that email.',
+                              btnCancelOnPress: () {},
+                              btnOkOnPress: () {},
+                            )..show(); */
+                          
                           }
                         } catch (e) {
                           throw Exception(e.toString());

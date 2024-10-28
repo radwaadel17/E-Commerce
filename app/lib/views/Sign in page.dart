@@ -12,6 +12,7 @@ import 'package:page_animation_transition/animations/right_to_left_faded_transit
 import 'package:page_animation_transition/page_animation_transition.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 
 class SignIn extends StatefulWidget {
   SignIn({super.key});
@@ -211,12 +212,23 @@ class _SignInState extends State<SignIn> {
                           checkProfileCompletion();
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'user-not-found') {
-                            ShowSnackbar(
-                                context, 'No user found for that email.');
+                             ShowSnackbar(
+                                context, 'No user found for that email.'); 
+                           
+                                
                             //print('No user found for that email.');
                           } else if (e.code == 'wrong-password') {
-                            ShowSnackbar(context,
-                                'Wrong password provided for that user.');
+                             ShowSnackbar(context,
+                                'Wrong password provided for that user.'); 
+                            /*   AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.error,
+                              animType: AnimType.rightSlide,
+                              title: 'Error!!',
+                              desc: 'Wrong password provided for that user..',
+                              btnCancelOnPress: () {},
+                              btnOkOnPress: () {},
+                            )..show(); */
                           }
                         }
                         IsLoading = false;
