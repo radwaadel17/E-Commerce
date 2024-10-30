@@ -30,7 +30,7 @@ class Home_page extends StatefulWidget {
 class _Home_pageState extends State<Home_page> {
   @override
   Widget build(BuildContext context) {
-    print('$name');
+
     return Scaffold(
       
       backgroundColor: Kcolor,
@@ -105,7 +105,7 @@ class _Home_pageState extends State<Home_page> {
             SizedBox(
               height: 50.h,
               child: Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 24.w),
+                padding:  EdgeInsets.symmetric(horizontal: 10.w),
                 child: ListView.builder(
                  scrollDirection: Axis.horizontal,
                   itemCount: Categories.length,

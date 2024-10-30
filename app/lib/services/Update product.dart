@@ -6,13 +6,15 @@ class UpdateProduct {
   UpdateProduct(this.dio);
   Future<ProductModel> updateProduct(
       {required String title,
-      required String price,
+      required dynamic price,
       required String description,
       required String image,
-      required String category}) async {
+      required String category,
+      required dynamic id ,
+      }) async {
     Response response = await Api(Dio())
         .putRequest(
-       url: 'https://fakestoreapi.com/products', values: {
+       url: 'https://fakestoreapi.com/products/$id', values: {
       "title": '$title',
       "price": '$price',
       "description": '$description',

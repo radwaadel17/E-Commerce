@@ -60,7 +60,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                  widget.productModel.categorey,
                  style: TextStyle(
                    fontFamily: 'Montserrat',
-                   fontSize: 16.sp,
+                   fontSize: 17.sp,
                    color: Kcolortxt,
                    fontWeight: FontWeight.w600,
                  ),
@@ -78,7 +78,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                      Icons.star_sharp,
                      color: Colors.yellow,
                    ),
-                   Text('${widget.productModel.rating.rate}'),
+                   Text('${widget.productModel.rating!.rate}'),
                  ],
                ),
                                 ),
@@ -251,7 +251,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               onTap: (){
                                 Navigator.of(context).push(
                                   PageAnimationTransition(
-                                    page: updateProductPage(), 
+                                    page: updateProductPage(model:widget.productModel), 
                                     pageAnimationType: BottomToTopFadedTransition())
                                 );
                               },
@@ -292,7 +292,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   
                   BoxShadow(
                        color: Kcolortxt.withOpacity(0.5),
-                       spreadRadius: 1.r,
+                       spreadRadius: 0.5.r,
                        blurRadius: 1.r,
                   )
 

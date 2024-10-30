@@ -28,15 +28,18 @@ class Api {
     }
   }
   Future<Response> putRequest({required String url ,String? token , required values}) async {
-    Map<String , String> headres = {};
+    Map<String , String> headres = {'Content-Type': 'application/x-www-form-urlencoded'};
     if(token != null){
         headres['Authorization'] = 'Bearer $token';
     }
     Response response = await dio.put(url , data: values , options: Options(
       headers: headres,
     ));
+     print('$values');
     if (response.statusCode == 200) {
+      print(response.data);
       return response;
+      
     } else {
       throw Exception(
           'There is a problem the status code is${response.statusCode}');

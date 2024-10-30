@@ -328,9 +328,17 @@ class _SignInState extends State<SignIn> {
                         ),
                         GestureDetector(
                             onTap: () async {
+                              IsLoading = true;
+                              setState(() {
+                                
+                              });
                               String? mail = await signInWithGoogle();
                               Email = mail;
                               checkProfileCompletion();
+                              IsLoading = false;
+                              setState(() {
+                                
+                              });
                             },
                             child: Image.asset('assets/images/google.png')),
                         SizedBox(

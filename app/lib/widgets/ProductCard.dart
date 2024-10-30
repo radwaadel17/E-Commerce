@@ -39,9 +39,9 @@ class ProductCard extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Text(model.title.substring(0 , 11), 
                     style: TextStyle(
-                       fontFamily: 'Montserrat',
+                      // fontFamily: 'Montserrat',
                       fontSize: 12.sp,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
                       overflow: TextOverflow.ellipsis
                     ),
                     maxLines:2,
@@ -70,14 +70,15 @@ class ProductCard extends StatelessWidget {
                       child: Icon(
                       Icons.star_sharp,
                       color: Colors.yellow,
+                      size: 15,
                       ),
                     ),
                     Padding(
                       padding:EdgeInsets.only(left: 5.w),
-                      child: Text('${model.rating.rate}'  , 
+                      child: Text('${model.rating!.rate}'  , 
                       style: TextStyle(
                          fontFamily: 'Montserrat',
-                        fontSize: 12.sp,
+                        fontSize: 10.sp,
                         fontWeight: FontWeight.w600,
                       ),
                       ),
