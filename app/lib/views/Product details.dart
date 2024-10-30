@@ -1,11 +1,14 @@
 import 'package:app/helper/Constants.dart';
 import 'package:app/models/product%20model.dart';
+import 'package:app/views/Update%20product%20page.dart';
 import 'package:app/widgets/ColorContainer.dart';
 import 'package:app/widgets/SizesContainer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:page_animation_transition/animations/bottom_to_top_faded_transition.dart';
+import 'package:page_animation_transition/page_animation_transition.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key, required this.productModel});
@@ -37,6 +40,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             
             ListView(
             children: [
+           
               SizedBox(
                 height: MediaQuery.of(context).size.height/60,
               ),
@@ -239,8 +243,33 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ),
                             ),
                             SizedBox(
+                              height: MediaQuery.of(context).size.height/60,
+                            ),
+                          Padding(
+                            padding:EdgeInsets.only(left: 40.w),
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.of(context).push(
+                                  PageAnimationTransition(
+                                    page: updateProductPage(), 
+                                    pageAnimationType: BottomToTopFadedTransition())
+                                );
+                              },
+                              child: Text(
+                                'Update Product' , 
+                              
+                              style: TextStyle(
+                                color: KButtonColor,
+                                fontSize: 16.sp,
+                                decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.w600
+                              ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
                               height: 100.h,
-                            )
+                            ),
               
             ],
                       ),

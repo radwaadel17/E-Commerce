@@ -11,7 +11,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:page_animation_transition/animations/bottom_to_top_faded_transition.dart';
 import 'package:page_animation_transition/animations/right_to_left_faded_transition.dart';
 import 'package:page_animation_transition/page_animation_transition.dart';
-
+import 'package:ionicons/ionicons.dart';
 class Home_page extends StatefulWidget {
   const Home_page({super.key , required this.email});
   final String email ;
@@ -35,6 +35,7 @@ class _Home_pageState extends State<Home_page> {
       
       backgroundColor: Kcolor,
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Kcolor,
         leading: IconButton(onPressed: (){
 
@@ -128,27 +129,34 @@ class _Home_pageState extends State<Home_page> {
           ],
         ),
         Positioned(
-          bottom: 2.h,
-          left: 25.w,
-          right: 25.r,
+          bottom: 0.h,
+          left: 0,
+          right: 0,
           child: Container(
-            height: 50.h,
+            height: 40.h,
             decoration: BoxDecoration(
-              color: KButtonColor,
-              borderRadius: BorderRadius.circular(35.r),
+              color: Kcolor,
+                 boxShadow: [
+                  BoxShadow(
+                       color: Kcolortxt.withOpacity(0.5),
+                       spreadRadius: 0.5.r,
+                       blurRadius: 1.r,
+                  )
+
+              ]   
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Icon(Icons.shopping_cart , color: Kcolor,),
-                Icon(Icons.favorite , color: Kcolor,),
-                Icon(Icons.home , color: Kcolor,),
+                Icon(Ionicons.cart_sharp, color: Kcolortxt,),
+                Icon(Ionicons.heart_sharp , color: Kcolortxt,),
+                Icon(Ionicons.home_sharp, color:Kcolortxt,),
                 GestureDetector(
                   onTap: (){
                     Navigator.of(context).push(PageAnimationTransition(page: profilePage(email: widget.email,), pageAnimationType: BottomToTopFadedTransition()));
                   },
-                  child: Icon(Icons.person , color: Kcolor,)),
-                Icon(Icons.notifications , color: Kcolor,),
+                  child: Icon(Ionicons.person , color: Kcolortxt,)),
+                Icon(Ionicons.notifications , color: Kcolortxt,),
               ],
             ),
           ),

@@ -12,7 +12,7 @@ class PhoneNumberTxt extends StatelessWidget {
       padding:EdgeInsets.symmetric(horizontal: 20.w),
       child: TextFormField(
         onChanged: onChanged,
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.phone,
         validator: (data){
          if(data ==''){
           return 'This filed is required';

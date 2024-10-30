@@ -9,6 +9,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:page_animation_transition/animations/right_to_left_faded_transition.dart';
 import 'package:page_animation_transition/page_animation_transition.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -111,37 +112,66 @@ class _SignUpState extends State<SignUp> {
                             email: Email!,
                             password: Passowrd!,
                           );
-                          ShowSnackbar(context, 'Sign up succesfully.');
+                          const snackBar = SnackBar(
+                            /// need to set following properties for best effect of awesome_snackbar_content
+                            elevation: 0,
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.transparent,
+                            content: AwesomeSnackbarContent(
+                              title: 'Congratulations!',
+                              message: 'Sign up succesfully',
+
+                              /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                              contentType: ContentType.success,
+                            ),
+                          );
+
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(snackBar);
+
                           Navigator.of(context).push(PageAnimationTransition(
                               page: SignIn(),
                               pageAnimationType: RightToLeftFadedTransition()));
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'weak-password') {
-                            /* ShowSnackbar(
-                                context, 'The password provided is too weak.'); */
-                             /*  AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.warning,
-                              animType: AnimType.rightSlide,
-                              title: 'Warning!!',
-                              desc: 'The password provided is too weak.',
-                              btnCancelOnPress: () {},
-                              btnOkOnPress: () {},
-                            )..show(); */
-                            //print('The password provided is too weak.');
+                            const snackBar = SnackBar(
+                            /// need to set following properties for best effect of awesome_snackbar_content
+                            elevation: 0,
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.transparent,
+                            content: AwesomeSnackbarContent(
+                              title: 'Weak password!',
+                              message: 'The password provided is too weak',
+
+                              /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                              contentType: ContentType.warning,
+                            ),
+                          );
+
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(snackBar);
+
+                            
                           } else if (e.code == 'email-already-in-use') {
-                            ShowSnackbar(context,
-                                'The account already exists for that email.');
-                            /*  AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.warning,
-                              animType: AnimType.rightSlide,
-                              title: 'Warning!!',
-                              desc: 'The account already exists for that email.',
-                              btnCancelOnPress: () {},
-                              btnOkOnPress: () {},
-                            )..show(); */
-                          
+                             const snackBar = SnackBar(
+                            /// need to set following properties for best effect of awesome_snackbar_content
+                            elevation: 0,
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.transparent,
+                            content: AwesomeSnackbarContent(
+                              title: 'Email already in use!',
+                              message:  'The account already exists for that email.',
+
+                              /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                              contentType: ContentType.warning,
+                            ),
+                          );
+
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(snackBar);
                           }
                         } catch (e) {
                           throw Exception(e.toString());
@@ -194,20 +224,7 @@ class _SignUpState extends State<SignUp> {
                           width: 20.w,
                         ),
                         GestureDetector(
-                            onTap: () {
-
-
-
-
-
-
-
-
-
-
-
-                              
-                            },
+                            onTap: () {},
                             child: Image.asset('assets/images/google.png')),
                         SizedBox(
                           width: 20.w,

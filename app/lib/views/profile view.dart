@@ -70,7 +70,7 @@ class _profilePageState extends State<profilePage> {
                         borderRadius: BorderRadius.circular(100.r),
                       ),
                       child: ClipOval(
-                          child: path == null ? Padding(
+                          child: path == 'path'? Padding(
                           padding: EdgeInsets.all(25.r),
                           child: Image.asset(
                             'assets/images/user.png',

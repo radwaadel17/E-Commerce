@@ -4,6 +4,7 @@ import 'package:app/views/Sign%20up%20page.dart';
 import 'package:app/views/user%20data%20page.dart';
 import 'package:app/widgets/TextField%20email.dart';
 import 'package:app/widgets/TextField%20password.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +13,6 @@ import 'package:page_animation_transition/animations/right_to_left_faded_transit
 import 'package:page_animation_transition/page_animation_transition.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:panara_dialogs/panara_dialogs.dart';
 
 class SignIn extends StatefulWidget {
   SignIn({super.key});
@@ -73,6 +73,20 @@ class _SignInState extends State<SignIn> {
       bool isProfileCompleted = userData['isProfileCompleted'] ?? false;
 
       if (isProfileCompleted) {
+        const snackBar = SnackBar(
+          elevation: 0,
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          content: AwesomeSnackbarContent(
+            title: 'Congratulations!',
+            message: 'Sucsess Login',
+            contentType: ContentType.success,
+          ),
+        );
+
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(snackBar);
         Navigator.of(context).pushReplacement(
           PageAnimationTransition(
             page: Home_page(
@@ -208,27 +222,59 @@ class _SignInState extends State<SignIn> {
                             email: Email!,
                             password: Password!,
                           );
-                          ShowSnackbar(context, 'Sucsess Login');
+
+                          const snackBar = SnackBar(
+                            elevation: 0,
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.transparent,
+                            content: AwesomeSnackbarContent(
+                              title: 'Congratulations!',
+                              message: 'Sucsess Login',
+                              contentType: ContentType.failure,
+                            ),
+                          );
+
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(snackBar);
+
                           checkProfileCompletion();
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'user-not-found') {
-                             ShowSnackbar(
-                                context, 'No user found for that email.'); 
-                           
-                                
+                            const snackBar = SnackBar(
+                              elevation: 0,
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: Colors.transparent,
+                              content: AwesomeSnackbarContent(
+                                title: 'User not found!',
+                                message: 'No user found for that email',
+                                contentType: ContentType.failure,
+                              ),
+                            );
+
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(snackBar);
+                            /* ShowSnackbar(
+                                context, 'No user found for that email.');  */
+
                             //print('No user found for that email.');
                           } else if (e.code == 'wrong-password') {
-                             ShowSnackbar(context,
-                                'Wrong password provided for that user.'); 
-                            /*   AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.error,
-                              animType: AnimType.rightSlide,
-                              title: 'Error!!',
-                              desc: 'Wrong password provided for that user..',
-                              btnCancelOnPress: () {},
-                              btnOkOnPress: () {},
-                            )..show(); */
+                            const snackBar = SnackBar(
+                              elevation: 0,
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: Colors.transparent,
+                              content: AwesomeSnackbarContent(
+                                title: 'Wrong password!',
+                                message:
+                                    'Wrong password provided for that user',
+                                contentType: ContentType.failure,
+                              ),
+                            );
+
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(snackBar);
                           }
                         }
                         IsLoading = false;

@@ -25,27 +25,19 @@ class ProductCard extends StatelessWidget {
               
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: EdgeInsets.all(8.0.r),
-                  child: Container(
-                    height: 120.h,
-                    //width: 200.h,
-                    decoration: BoxDecoration(
-                      color: Kcolor,
-                      borderRadius: BorderRadius.circular(24 .r
-                     ),
-                     image: DecorationImage(
-                      image: NetworkImage(model.Image)),
-          
-                    ),
-                  ),
-                ),
+               SizedBox(
+                height: 100.h,
+                child: Padding(
+                  padding: EdgeInsets.only(right: 30.w),
+                  child: Image(image: NetworkImage(model.Image)),
+                )),
                 Padding(
                   padding:EdgeInsets.only(left: 25.w),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(model.categorey  , 
+                    child: Text(model.title.substring(0 , 11), 
                     style: TextStyle(
                        fontFamily: 'Montserrat',
                       fontSize: 12.sp,
@@ -98,6 +90,7 @@ class ProductCard extends StatelessWidget {
            Positioned(
            // bottom: 23.h,
             right: 0.w,
+            top: 5.h,
             child:IconButton(onPressed: (){}, icon: Icon(
               Icons.favorite_border,
               color: KButtonColor,

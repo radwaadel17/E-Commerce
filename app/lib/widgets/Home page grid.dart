@@ -29,9 +29,8 @@ class HomePageGrid extends StatelessWidget {
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
-        childAspectRatio:(itemwidth / (itemwidth * 1.7)),
-        crossAxisSpacing: 5.0.w,
-        mainAxisSpacing: 1.0.h,
+        childAspectRatio:(itemwidth / (itemwidth*1.2)),
+        
           ),
           itemCount:data.length,
           itemBuilder: (context, index) {
