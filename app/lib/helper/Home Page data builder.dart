@@ -1,6 +1,7 @@
 import 'package:app/models/product%20model.dart';
 import 'package:app/services/Get%20all%20products.dart';
 import 'package:app/services/Get%20category.dart';
+import 'package:app/views/Home%20page.dart';
 import 'package:app/widgets/Home%20page%20grid.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';

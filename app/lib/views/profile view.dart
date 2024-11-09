@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:page_animation_transition/animations/right_to_left_faded_transition.dart';
 import 'package:page_animation_transition/page_animation_transition.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 
 class profilePage extends StatefulWidget {
   const profilePage({super.key , required this.email});
@@ -38,9 +39,9 @@ class _profilePageState extends State<profilePage> {
     setState(() {
       
     });
-    print("Number of documents: ${userSnapshot.docs.length}");
+    /* print("Number of documents: ${userSnapshot.docs.length}");
     print(name);
-    print(path);
+    print(path); */
   }
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +77,7 @@ class _profilePageState extends State<profilePage> {
                             'assets/images/user.png',
                             fit: BoxFit.fill,
                           ),
-                        ) : Image.file(File(path!) ,  fit: BoxFit.fill)),
+                        ) : Image.file(File(path!) ,  fit: BoxFit.cover)),
                         
                     ),
                     Positioned(
@@ -165,9 +166,23 @@ class _profilePageState extends State<profilePage> {
           ),
           GestureDetector(
             onTap: (){
-              GoogleSignIn googleSignIn = GoogleSignIn();
-              googleSignIn.disconnect();
-              Navigator.of(context).push(PageAnimationTransition(page: SignIn(), pageAnimationType:RightToLeftFadedTransition()));
+                PanaraConfirmDialog.show(
+                context,
+                title: "Are you sure?",
+                message: "Do you want to log out ?",
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                onTapCancel: () {
+                  Navigator.of(context).pop(); 
+                },
+                onTapConfirm: () {
+                    GoogleSignIn googleSignIn = GoogleSignIn();
+                     googleSignIn.disconnect();
+                   Navigator.of(context).push(PageAnimationTransition(page: SignIn(), pageAnimationType: RightToLeftFadedTransition()));
+                },
+                panaraDialogType: PanaraDialogType.warning,
+                barrierDismissible: false, // optional parameter (default is true)
+              );
             },
             child: Features(
               txt: 'Log out',
@@ -208,7 +223,7 @@ class Features extends StatelessWidget {
            ),
            Padding(
              padding: EdgeInsets.only(left: 15.w),
-             child: Text(txt , style: TextStyle(fontSize: 16.sp , fontWeight: FontWeight.w700),),
+             child: Text(txt , style: TextStyle(fontSize: 15.sp),),
            ) , 
           
     

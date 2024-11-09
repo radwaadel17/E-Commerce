@@ -230,7 +230,7 @@ class _SignInState extends State<SignIn> {
                             content: AwesomeSnackbarContent(
                               title: 'Congratulations!',
                               message: 'Sucsess Login',
-                              contentType: ContentType.failure,
+                              contentType: ContentType.success,
                             ),
                           );
 

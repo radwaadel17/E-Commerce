@@ -10,6 +10,9 @@ class ProductModel {
   final String Image;
   final String description;
   final RatingModel? rating ;
+   String color= "Brown";
+   String size = "S";
+
   ProductModel(
       {required this.id,
       required this.rating ,
@@ -17,7 +20,8 @@ class ProductModel {
       required this.categorey,
       required this.price,
       required this.title,
-      required this.description});
+      required this.description 
+    });
   factory ProductModel.fromJson(jsonData) {
     return ProductModel(
         id: jsonData['id'],

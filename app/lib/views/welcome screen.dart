@@ -1,5 +1,4 @@
 import 'package:app/helper/Constants.dart';
-import 'package:app/main.dart';
 import 'package:app/views/Sign%20in%20page.dart';
 import 'package:app/views/onboarding%20page.dart';
 import 'package:flutter/material.dart';
@@ -57,13 +56,13 @@ class Welcome_screen extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pushReplacement(PageAnimationTransition(page: onboarding_screen(), pageAnimationType:RightToLeftFadedTransition()));
             },
-            child: Text(
-              "Let's Get Started",
-              style: TextStyle(fontSize: 17, color: Kcolor),
-            ),
             style: ElevatedButton.styleFrom(
               backgroundColor: KButtonColor,
               fixedSize: Size(250.w, 46.h),
+            ),
+            child: const Text(
+              "Let's Get Started",
+              style: TextStyle(fontSize: 17, color: Kcolor),
             ),
           ),
           SizedBox(
@@ -78,7 +77,7 @@ class Welcome_screen extends StatelessWidget {
                   child: Text(
                     'Already have an account ?  ',
                     style: TextStyle(
-                        fontSize: 10.sp,
+                        fontSize: 12.sp,
                         color: const Color.fromARGB(255, 38, 38, 38)),
                   ),
                 ),

@@ -1,11 +1,14 @@
+
+import 'package:app/cubits/cart%20cubit/CartCubit.dart';
 import 'package:app/helper/Constants.dart';
 import 'package:app/models/product%20model.dart';
-import 'package:app/views/Update%20product%20page.dart';
+import 'package:app/views/add%20to%20cart%20page.dart';
 import 'package:app/widgets/ColorContainer.dart';
 import 'package:app/widgets/SizesContainer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_animation_transition/animations/bottom_to_top_faded_transition.dart';
 import 'package:page_animation_transition/page_animation_transition.dart';
@@ -22,13 +25,21 @@ class _ProductDetailsState extends State<ProductDetails> {
   final List<String> Sizes = const ['S', 'M', 'L', 'XL', 'XXL'];
   int selected = 0;
   int selectedColor = 0;
+  String? size = 'S';
   List<Color> colorList = [
     Colors.brown,
     Colors.black,
     Colors.grey,
     Colors.teal,
   ];
-    bool Isread = false;
+  List<String> colorNames = [
+  'Brown',
+  'Black',
+  'Grey',
+  'Teal',
+];
+  bool Isread = false;
+  String color =  'Brown' ;
   @override
   Widget build(BuildContext context) {
 
@@ -59,8 +70,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                child: Text(
                  widget.productModel.categorey,
                  style: TextStyle(
-                   fontFamily: 'Montserrat',
-                   fontSize: 17.sp,
+                  
+                   fontSize: 15.sp,
                    color: Kcolortxt,
                    fontWeight: FontWeight.w600,
                  ),
@@ -91,9 +102,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(widget.productModel.title,
                  style: TextStyle(
-                   fontFamily: 'Montserrat',
+                  
                    //color: K,
-                   fontSize: 20.sp,
+                   fontSize: 15.sp,
                    fontWeight: FontWeight.w600,
                  )),
                               ),
@@ -109,8 +120,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                child: Text(
                  'Product Details',
                  style: TextStyle(
-                   fontFamily: 'Montserrat',
-                   fontSize: 16.sp,
+                  // fontFamily: 'Montserrat',
+                   fontSize: 15.sp,
                    color: Kcolortxt,
                         fontWeight: FontWeight.w600,
                       ),
@@ -123,8 +134,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 child: Text(
                   '${widget.productModel.description}',
                   style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w600,
+                    //fontFamily: 'Montserrat',
+                   // fontWeight: FontWeight.w600,
                     fontSize: 15.sp,
                     overflow: Isread == true ? null : TextOverflow.ellipsis,
                   ),
@@ -142,7 +153,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: Text(
                     Isread ? 'Read less' : 'Read more',
                     style: TextStyle(
-                       fontFamily: 'Montserrat',
+                      // fontFamily: 'Montserrat',
                       fontWeight: FontWeight.w600,
                       fontSize: 15.sp,
                       color: KButtonColor,
@@ -162,9 +173,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                     child: Text(
                       'Select Size',
                       style: TextStyle(
-                         fontFamily: 'Montserrat',
+                         //fontFamily: 'Montserrat',
                    //color: Kcolortxt,
-                   fontSize: 16.sp,
+                   fontSize: 15.sp,
                    fontWeight: FontWeight.w600,
                  ),
                ),
@@ -188,6 +199,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                        onTap: () {
                          setState(() {
                            selected = index;
+                           size = Sizes[index];
                          });
                        },
                        child: SizesContainer(
@@ -208,9 +220,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                  'Select Color',
                  
                  style: TextStyle(
-                   fontFamily: 'Montserrat',
+                  // fontFamily: 'Montserrat',
                    //color: Kcolortxt,
-                   fontSize: 16.sp,
+                   fontSize: 15.sp,
                    fontWeight: FontWeight.w600,
                  ),
                ),
@@ -233,6 +245,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                        onTap: () {
                          setState(() {
                            selectedColor = index;
+                           color = colorNames[index];
                          });
                        },
                        child: ColorContainer(
@@ -243,33 +256,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ),
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height/60,
+                              height: 100.h
                             ),
-                          Padding(
-                            padding:EdgeInsets.only(left: 40.w),
-                            child: GestureDetector(
-                              onTap: (){
-                                Navigator.of(context).push(
-                                  PageAnimationTransition(
-                                    page: updateProductPage(model:widget.productModel), 
-                                    pageAnimationType: BottomToTopFadedTransition())
-                                );
-                              },
-                              child: Text(
-                                'Update Product' , 
-                              
-                              style: TextStyle(
-                                color: KButtonColor,
-                                fontSize: 16.sp,
-                                decoration: TextDecoration.underline,
-                                fontWeight: FontWeight.w600
-                              ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                              height: 100.h,
-                            ),
+                          
+                        
               
             ],
                       ),
@@ -304,12 +294,18 @@ class _ProductDetailsState extends State<ProductDetails> {
                   Text(
                      '${widget.productModel.price}\$', 
                      style: TextStyle(
-                       fontFamily: 'Montserrat',
+                      // fontFamily: 'Montserrat',
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w700,
                      ),
                   ),
-                  ElevatedButton(onPressed: (){}
+                  ElevatedButton(onPressed: (){
+                    widget.productModel.size = size! ;
+                    widget.productModel.color = color!;
+                    BlocProvider.of<CartCubit>(context).addToCart(widget.productModel);
+                    Navigator.of(context).push(PageAnimationTransition(page: addTocartPage(), pageAnimationType: BottomToTopFadedTransition()));
+                    
+                  }
                   
                   ,
                   style: ElevatedButton.styleFrom(
@@ -324,7 +320,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                        const Text('Add to cart' ,
                        
                        style: TextStyle(
-                         fontFamily: 'Montserrat',
+                        // fontFamily: 'Montserrat',
                            color: Kcolor ,
                            fontWeight: FontWeight.w600,
                        ),
